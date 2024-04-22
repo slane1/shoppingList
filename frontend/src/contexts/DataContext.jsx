@@ -1,7 +1,8 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
+const DataContext = createContext();
 
-export default function DataContext({children}) {
+export default function DataContextProvider({children}) {
     const [loading, setLoading] = useState(true);
     const [shoppingLists, setShoppingLists] = useState([]);
     const backendUrl = import.meta.env.VITE_BACKEND_URL;

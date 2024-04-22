@@ -1,3 +1,5 @@
+
+
 export default function Dashboard() {
     return (
         <div>
@@ -9,7 +11,7 @@ export default function Dashboard() {
                 <h2>Your Shopping Lists</h2>
             </div>
             <div>
-                <button>Create new ShoppingList</button>
+                <button>Create a new Shopping List</button>
             </div>
         </div>
     );
