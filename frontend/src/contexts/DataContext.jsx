@@ -21,6 +21,23 @@ export default function DataContextProvider({children}) {
                 quantity: 3,
                 done: true
             }]
+    },
+    {
+        id: 2,
+        title: 'My Shopping List 2',
+        items: [
+            {
+                number: 1,
+                name: 'B1',
+                quantity: 5,
+                done: false
+            },
+            {
+                number: 2,
+                name: 'B2',
+                quantity: 3,
+                done: true
+            }]
     }]
     );
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
