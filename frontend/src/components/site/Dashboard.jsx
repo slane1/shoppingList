@@ -12,19 +12,19 @@ export default function Dashboard() {
                 <p>Welcome to the Dashboard</p>
             </div>
             <div>
-            <h2>Your Shopping Lists</h2>
-            <ul>
-                {shoppingLists.map((data) => (
+                <h2>Your Shopping Lists</h2>
+                <ul>
+                    {shoppingLists.map((data) => (
                     <li key={data.id}>
-                    <Link
-                    to={{pathname: `/shopping-list/${data.id}`,}}
-                    state={{ data: data}}
-                    >
-                    {data.title}
-                    </Link>
+                        <Link
+                        to={{pathname: `/shopping-list/${data.id}`,}}
+                        state={{ data: data}}
+                        >
+                        {data.title}
+                        </Link>
                     </li>
                 ))}
-            </ul>
+                </ul>
             </div>
             <div>
                 <button>Create a new Shopping List</button>

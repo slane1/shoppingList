@@ -3,6 +3,7 @@ import axios from 'axios';
 export const DataContext = createContext();
 
 export default function DataContextProvider({children}) {
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const [loading, setLoading] = useState(true);
     const [shoppingLists, setShoppingLists] = useState(
     [{
@@ -40,7 +41,6 @@ export default function DataContextProvider({children}) {
             }]
     }]
     );
-    const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
     async function fetchShoppingList() {
         try {
@@ -54,7 +54,7 @@ export default function DataContextProvider({children}) {
 
     return (
         <DataContext.Provider 
-        value={{ shoppingLists, setShoppingLists, loading, setLoading }}>
+        value={{ shoppingLists, setShoppingLists, loading, setLoading, backendUrl }}>
             {children}
         </DataContext.Provider>
     )
