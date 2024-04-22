@@ -1,10 +1,46 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
+export const DataContext = createContext();
 
-export default function DataContext({children}) {
-    const [loading, setLoading] = useState(true);
-    const [shoppingLists, setShoppingLists] = useState([]);
+export default function DataContextProvider({children}) {
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    const [loading, setLoading] = useState(true);
+    const [shoppingLists, setShoppingLists] = useState(
+    [{
+        id: 1,
+        title: 'My Shopping List',
+        items: [
+            {
+                number: 1,
+                name: 'Apples',
+                quantity: 5,
+                done: false
+            },
+            {
+                number: 2,
+                name: 'Bananas',
+                quantity: 3,
+                done: true
+            }]
+    },
+    {
+        id: 2,
+        title: 'My Shopping List 2',
+        items: [
+            {
+                number: 1,
+                name: 'B1',
+                quantity: 5,
+                done: false
+            },
+            {
+                number: 2,
+                name: 'B2',
+                quantity: 3,
+                done: true
+            }]
+    }]
+    );
 
     async function fetchShoppingList() {
         try {
@@ -18,7 +54,7 @@ export default function DataContext({children}) {
 
     return (
         <DataContext.Provider 
-        value={{ shoppingLists, setShoppingLists, loading, setLoading }}>
+        value={{ shoppingLists, setShoppingLists, loading, setLoading, backendUrl }}>
             {children}
         </DataContext.Provider>
     )
