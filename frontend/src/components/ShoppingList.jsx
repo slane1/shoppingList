@@ -1,7 +1,13 @@
-export default function ShoppingList({slist}) {
+import { Link } from "react-router-dom";
 
+export default function ShoppingList({slist, handleGot, handleDelete}) {
     if (!slist) {
-        return <h1>Error loading Shopping List</h1>;
+        return (
+            <>
+            <h1>Error loading Shopping List</h1>
+            <Link to="/">Back to Homepage</Link>
+            </>
+        );
     } else {
     return (
         <div>
@@ -9,7 +15,12 @@ export default function ShoppingList({slist}) {
             <ul>
                 {slist.items.map((item) => (
                     <li key={item.number}>
-                        {item.name} - {item.quantity}
+                        <div>
+                        <p>{item.name}</p>
+                        <p>{item.quantity}</p>
+                        <button onClick={handleGot}>Got</button>
+                        <button onClick={handleDelete}>X</button>
+                        </div>
                     </li>
                 ))}
             </ul>
