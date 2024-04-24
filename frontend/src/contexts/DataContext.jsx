@@ -52,9 +52,34 @@ export default function DataContextProvider({children}) {
         }
     }
 
+    async function markItemDone(id, number) {
+        try {
+            await axios.put(`${backendUrl}/shopping-list/${id}/item/${number}`);
+            fetchShoppingList();
+        } catch (error) {
+            console.error('Error marking item done:', error);
+        }
+    }
+    async function deleteItem(id, number) {
+        try {
+            await axios.delete(`${backendUrl}/shopping-list/${id}/item/${number}`);
+            fetchShoppingList();
+        } catch (error) {
+            console.error('Error deleting item:', error);
+        }
+    }
+    async function addItem(id, item) {
+        try {
+            await axios.post(`${backendUrl}/shopping-list/${id}/item`, item);
+            fetchShoppingList();
+        } catch (error) {
+            console.error('Error adding item:', error);
+        }
+    }
+
     return (
         <DataContext.Provider 
-        value={{ shoppingLists, setShoppingLists, loading, setLoading, backendUrl }}>
+        value={{ shoppingLists, setShoppingLists, loading, setLoading, backendUrl, markItemDone, deleteItem }}>
             {children}
         </DataContext.Provider>
     )

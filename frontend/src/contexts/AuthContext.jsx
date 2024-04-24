@@ -7,9 +7,14 @@ export default function AuthProvider({children}) {
         username: "Username",
         email: "mail@example.mail",
     });
-    const [loggedIn, setLoggedIn] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(true);
     return (
-        <AuthContext.Provider value={{user, setUser}}>
+        <AuthContext.Provider value={{
+            user,
+            setUser,
+            loggedIn,
+            setLoggedIn
+        }}>
             {children}
         </AuthContext.Provider>
     )

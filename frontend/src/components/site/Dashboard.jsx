@@ -1,11 +1,16 @@
 import { useContext } from "react";
 import { DataContext }  from "../../contexts/DataContext";
+import { AuthContext } from "../../contexts/AuthContext";
+import LoggedOut from "../LoggedOut";
 import { Link } from "react-router-dom";
 
 export default function Dashboard() {
     const { shoppingLists } = useContext(DataContext);
+    const { loggedIn } = useContext(AuthContext);
 
     return (
+    <>
+        {!loggedIn ? <LoggedOut /> : 
         <div>
             <div>
                 <h1>Dashboard</h1>
@@ -15,7 +20,7 @@ export default function Dashboard() {
                 <h2>Your Shopping Lists</h2>
                 <ul>
                     {shoppingLists.map((data) => (
-                    <li key={data.id}>
+                        <li key={data.id}>
                         <Link
                         to={{pathname: `/shopping-list/${data.id}`,}}
                         state={{ data: data}}
@@ -30,5 +35,7 @@ export default function Dashboard() {
                 <button>Create a new Shopping List</button>
             </div>
         </div>
+        }
+    </>
     );
 }
