@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
-export default function ShoppingList({slist, handleGot, handleDelete}) {
-    if (!slist) {
+export default function ShoppingList({data}) {
+    if (!data) {
         return (
             <>
             <h1>Error loading Shopping List</h1>
@@ -11,9 +11,9 @@ export default function ShoppingList({slist, handleGot, handleDelete}) {
     } else {
     return (
         <div>
-            <h1>{slist.title}</h1>
+            <h1>{data.title}</h1>
             <ul>
-                {slist.items.map((item) => (
+                {data.items.map((item) => (
                     <li key={item.number}>
                         <div>
                         <p>{item.name}</p>
