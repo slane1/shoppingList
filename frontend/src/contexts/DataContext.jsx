@@ -68,14 +68,6 @@ export default function DataContextProvider({children}) {
             console.error('Error deleting item:', error);
         }
     }
-    async function addItem(id, item) {
-        try {
-            await axios.post(`${backendUrl}/shopping-list/${id}/item`, item);
-            fetchShoppingList();
-        } catch (error) {
-            console.error('Error adding item:', error);
-        }
-    }
 
     return (
         <DataContext.Provider 

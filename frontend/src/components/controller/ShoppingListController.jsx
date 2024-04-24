@@ -44,8 +44,11 @@ export default function ShoppingListController() {
 
     return (
         <div>
-            {!loggedIn ? <LoggedOut /> : 
-            <ShoppingList data={thisList}/> 
+            {!loggedIn ? <LoggedOut /> :
+            <div>
+                <ShoppingList data={thisList}/> 
+                <AddItem id={thisList.id}/>           
+            </div>
             }
         </div>
     )
