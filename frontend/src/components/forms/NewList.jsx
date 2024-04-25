@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
-import { DataContext } from '../contexts/DataContext';
+import { DataContext } from '../../contexts/DataContext';
 
 export default function NewList() {
     const { backendUrl } = useContext(DataContext);
-    const history = useHistory();
+    const navigate = useNavigate();
     const [newList, setNewList] = useState({
         title: "",
         items: []
@@ -26,7 +26,7 @@ export default function NewList() {
                 items: []
             });
             fetchShoppingList();
-            history.push('/');
+            navigate('/');
         } catch (error) {
             console.error('Error creating new list:', error);
         }
