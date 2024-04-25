@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function ShoppingList({data}) {
+export default function ShoppingList({data, onGot, onDelete}) {
     if (!data) {
         return (
             <>
@@ -18,8 +18,8 @@ export default function ShoppingList({data}) {
                         <div>
                         <p>{item.name}</p>
                         <p>{item.quantity}</p>
-                        <button onClick={handleGot}>Got</button>
-                        <button onClick={handleDelete}>X</button>
+                        <button onClick={() => onGot(item)}>Got</button>
+                        <button onClick={() => onDelete(item)}>X</button>
                         </div>
                     </li>
                 ))}
