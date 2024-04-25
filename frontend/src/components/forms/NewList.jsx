@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { DataContext } from '../../contexts/DataContext';
+import Header from '../site/Header';
+import Footer from '../site/Footer';
 
 export default function NewList() {
     const { backendUrl } = useContext(DataContext);
@@ -37,6 +39,7 @@ export default function NewList() {
 
     return (
         <div>
+            <Header />
             <div>
                 <form action="">
                     <label htmlFor="title">Title:</label>
@@ -44,6 +47,7 @@ export default function NewList() {
                     <button type='submit' onClick={handleSubmit}>Add</button>
                 </form>
             </div>
+            <Footer />
         </div>
     )
 }
