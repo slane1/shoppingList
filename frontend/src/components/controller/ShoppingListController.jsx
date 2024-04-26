@@ -4,6 +4,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import ShoppingList from "../ShoppingList";
+import AddItem from "../AddItem";
 import LoggedOut from "../LoggedOut";
 
 export default function ShoppingListController() {
@@ -41,12 +42,20 @@ export default function ShoppingListController() {
         }
     }, []);
 
+    const handleGot = (number) => {
+        console.log("Got item", number);
+    }
+
+    const handleDelete = (number) => {
+        console.log("Delete item", number);
+    }
+
 
     return (
         <div>
             {!loggedIn ? <LoggedOut /> :
             <div>
-                <ShoppingList data={thisList}/> 
+                <ShoppingList data={thisList} onGot={handleGot} onDelete={handleDelete}/> 
                 <AddItem id={thisList.id}/>           
             </div>
             }
