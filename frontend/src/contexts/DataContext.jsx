@@ -5,6 +5,23 @@ export const DataContext = createContext();
 export default function DataContextProvider({children}) {
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const [loading, setLoading] = useState(true);
+    const [displayList, setDisplayList] = useState({
+        id: 1,
+        title: 'My Shopping List',
+        items: [
+            {
+                number: 1,
+                name: 'Apples',
+                quantity: 5,
+                done: false
+            },
+            {
+                number: 2,
+                name: 'Bananas',
+                quantity: 3,
+                done: true
+            }]
+    });
     const [shoppingLists, setShoppingLists] = useState(
     [{
         id: 1,
@@ -71,7 +88,7 @@ export default function DataContextProvider({children}) {
 
     return (
         <DataContext.Provider 
-        value={{ shoppingLists, setShoppingLists, loading, setLoading, backendUrl, markItemDone, deleteItem }}>
+        value={{ shoppingLists, setShoppingLists, loading, setLoading, backendUrl, markItemDone, deleteItem, displayList, setDisplayList }}>
             {children}
         </DataContext.Provider>
     )

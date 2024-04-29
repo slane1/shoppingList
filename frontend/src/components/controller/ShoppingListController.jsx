@@ -9,28 +9,11 @@ import LoggedOut from "../LoggedOut";
 
 export default function ShoppingListController() {
     const { loggedIn } = useContext(AuthContext);
-    const { backendUrl } = useContext(DataContext);
+    const { backendUrl, displayList, setDisplayList } = useContext(DataContext);
     const location = useLocation();
-    const [thisList, setThisList] = useState({
-        id: 1,
-        title: 'My Shopping List',
-        items: [
-            {
-                number: 1,
-                name: 'Apples',
-                quantity: 5,
-                done: false
-            },
-            {
-                number: 2,
-                name: 'Bananas',
-                quantity: 3,
-                done: true
-            }]
-    });
 
     useEffect(() => {
-        if (!thisList) {
+        if (!displayList.id !== location.pathname.split("/")[2]) {
             axios.get(`${backendUrl}/shopping-list/${location.pathname.split("/")[2]}`)
             .then((response) => {
                 console.log(response.data);
@@ -40,7 +23,7 @@ export default function ShoppingListController() {
                 console.error(error);
             });
         }
-    }, []);
+    }, [displayList]);
 
     const handleGot = (number) => {
         console.log("Got item", number);
@@ -55,8 +38,8 @@ export default function ShoppingListController() {
         <div>
             {!loggedIn ? <LoggedOut /> :
             <div>
-                <ShoppingList data={thisList} onGot={handleGot} onDelete={handleDelete}/> 
-                <AddItem id={thisList.id}/>           
+                <ShoppingList data={displayList} onGot={handleGot} onDelete={handleDelete}/> 
+                <AddItem id={displayList.id}/>           
             </div>
             }
         </div>
