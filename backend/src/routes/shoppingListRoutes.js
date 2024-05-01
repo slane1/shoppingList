@@ -1,5 +1,5 @@
 import express from 'express';
-import verifyToken from '../middlewares/verifyToken.js';
+import verifyToken from '../middleware/verifyToken.js';
 import { createShoppingList, deleteShoppingList, getShoppingLists } from '../controllers/shoppingListController.js';
 
 const router = express.Router();

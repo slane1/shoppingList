@@ -1,5 +1,5 @@
-import shoppingListModel from "../models/shoppingListModel";
-import itemModel from "../models/itemModel";
+import shoppingListModel from "../models/shoppingListModel.js";
+import itemModel from "../models/itemModel.js";
 
 // Create new item for shopping list
 export const createItem = async (req, res) => {

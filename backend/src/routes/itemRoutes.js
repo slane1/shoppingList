@@ -1,6 +1,6 @@
-import { createItem, updateItem, deleteItem } from "../controllers/ItemController";
+import { createItem, updateItem, deleteItem } from "../controllers/ItemController.js";
 import express from "express";
-import verifyToken from "../middlewares/verifyToken";
+import verifyToken from "../middleware/verifyToken.js";
 
 const router = express.Router();
 
