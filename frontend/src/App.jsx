@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import Dashboard from "./components/site/Dashboard";
 import Frontpage from "./components/site/Frontpage";
-import Register from "./components/forms/Register";
-import Login from "./components/forms/Login";
+import Register from "./components/site/Register";
+import Login from "./components/site/Login";
 import NewList from "./components/forms/NewList";
 import ShoppingListController from "./components/controller/ShoppingListController";
 import './App.css'

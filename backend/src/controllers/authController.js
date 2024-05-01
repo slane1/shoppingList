@@ -74,7 +74,6 @@ export const login = async (req, res) => {
 
 
 // logout controller
-
 export const logout = async (req, res) => {
     try {
         res.clearCookie("token", { path: "/" });
@@ -84,17 +83,4 @@ export const logout = async (req, res) => {
     }
 };
 
-// verify token controller
-
-export const verifyToken = async (req, res) => {
-    try {
-        const token = req.cookies.token;
-        if (!token) {
-            return res.json(false);
-        }
-        jwt.verify(token, process.env.JWT_SECRET);
-        return res.json(true);
-    } catch (err) {
-        return res.json(false);
-    }
-};
+// authUser controller
