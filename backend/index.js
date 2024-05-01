@@ -4,7 +4,7 @@ import "./src/database/database.js";
 import cors from 'cors';
 // import routes
 import authRoutes from './src/routes/authRoutes.js';
-import listRoutes from './src/routes/listRoutes.js';
+import itemRoutes from './src/routes/itemRoutes.js';
 import shoppingListRoutes from './src/routes/shoppingListRoutes.js';
 
 
@@ -21,8 +21,8 @@ app.use(cors(
 
 // routes
 app.use("/auth", authRoutes)
-app.use("/lists", listRoutes)
 app.use("/shopping-list", shoppingListRoutes)
+app.use("/item", itemRoutes)
 
 
 // port listening
