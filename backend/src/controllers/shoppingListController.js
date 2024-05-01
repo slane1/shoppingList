@@ -25,7 +25,7 @@ export const createShoppingList = async (req, res) => {
     }
 
     // Delete shopping list for user
-    const deleteShoppingList = async (req, res) => {
+    export const deleteShoppingList = async (req, res) => {
         const { userId, listId } = req.body;
         try {
             const user = await userModel.findById(userId);
@@ -51,7 +51,7 @@ export const createShoppingList = async (req, res) => {
     }
 
     // Get all shopping lists for user
-    const getShoppingLists = async (req, res) => {
+    export const getShoppingLists = async (req, res) => {
         const { userId } = req.body;
         try {
             const user = await userModel.findById(userId);
