@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useContext } from "react";
+import { DataContext } from "../../contexts/DataContext";
 import axios from "axios";
 
-
 export default function Register() {
+    const { backendUrl } = useContext(DataContext);
     const [register, setRegister] = useState({
         username: "",
         email: "",
@@ -16,13 +18,19 @@ export default function Register() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(register);
         try {
-            const response = await axios.post("/auth/register", register);
-            console.log(response);
+            const response = await axios.post(`${backendUrl}/auth/register`, register);
+            setResponse(response.data);
         } catch (err) {
             console.error(err);
         }
     };
+
+    useEffect(() => {
+        console.log(response.data);
+    }
+    , [response]);
     
 
     return (

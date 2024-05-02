@@ -13,7 +13,7 @@ export default function AuthProvider({children}) {
         try {
             const response = await fetch("/auth/auth-user");
             const data = await response.json();
-            if (data.username) {
+            if (data) {
                 setUser(data);
                 setLoggedIn(true);
             } else {
