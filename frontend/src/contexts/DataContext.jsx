@@ -71,7 +71,7 @@ export default function DataContextProvider({children}) {
 
     async function markItemDone(id, number) {
         try {
-            await axios.put(`${backendUrl}/shopping-list/${id}/item/${number}`);
+            await axios.put(`${backendUrl}/item/${number}`);
             fetchShoppingList();
         } catch (error) {
             console.error('Error marking item done:', error);
@@ -79,7 +79,7 @@ export default function DataContextProvider({children}) {
     }
     async function deleteItem(id, number) {
         try {
-            await axios.delete(`${backendUrl}/shopping-list/${id}/item/${number}`);
+            await axios.delete(`${backendUrl}/item/${number}`);
             fetchShoppingList();
         } catch (error) {
             console.error('Error deleting item:', error);
