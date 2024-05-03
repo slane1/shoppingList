@@ -4,7 +4,8 @@ import { DataContext } from '../../contexts/DataContext';
 import { AuthContext } from '../../contexts/AuthContext';
 import axios from 'axios';
 
-export default function Login() {
+export default function LoginForm() {
+    const navigate = useNavigate();
     const { backendUrl } = useContext(DataContext);
     const { checkLoggedIn } = useContext(AuthContext);
     const [login, setLogin] = useState({
@@ -20,22 +21,32 @@ export default function Login() {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            const response = await axios.post(`${backendUrl}/auth/login`, login);
-            console.log(response.data);
-            if (response.data.token) {
-                localStorage.setItem('token', response.data.token);
-                checkLoggedIn();
-                // Redirect to dashboard
-                navigate("/dashboard");
+            const { data } = await axios.post(
+                `${backendUrl}/auth/login`, 
+                login,
+                { withCredentials: true });
+            if (data.token) {
+                const token = data.token;
+                localStorage.setItem('token', token);
+                await checkLoggedIn();
+                navigate('/dashboard');
             }
-        } catch (err) {
-            console.error(err);
+        }
+        catch (err) {
+            console.log(err);
         }
     }
 
+
     return (
         <div>
-
+            <h1>Login</h1>
+            <form onSubmit={handleSubmit}>
+                <input type="email" name="email" placeholder="Email" onChange={handleChange} />
+                <input type="password" name="password" placeholder="Password" onChange={handleChange} />
+                <button type="submit">Login</button>
+            </form>
+            <Link to="/register">Register</Link>
         </div>
     )
 } 

@@ -1,8 +1,10 @@
 import React, { createContext, useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
 import axios from 'axios';
 export const AuthContext = createContext();
 
 export default function AuthProvider({children}) {
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const [user, setUser] = useState({
         id: 1,
         username: "Username",
@@ -13,12 +15,16 @@ export default function AuthProvider({children}) {
     async function checkLoggedIn() {
         console.log("Checking logged in");
         try {
-            const response = await axios.get('/auth/auth-user', {
+            const response = await axios.get(`${backendUrl}/auth/auth-user`, {
                 withCredentials: true
         });
         if (response.data) {
             console.log("setting user", response.data);
-            setUser(response.data);
+            setUser({
+                id: response.data._id,
+                username: response.data.name,
+                email: response.data.email
+            });
             setLoggedIn(true);
         } else {
             console.log("no user found");
@@ -34,8 +40,12 @@ export default function AuthProvider({children}) {
     }}
 
     useEffect(() => {
-        console.log("useEffect running auth context");
-        checkLoggedIn();
+        const token = Cookies.get('token');
+        if (token) {
+            checkLoggedIn();
+        } else {
+            setLoggedIn(false);
+        }
     }, []);
     
     return (
@@ -43,7 +53,8 @@ export default function AuthProvider({children}) {
             user,
             setUser,
             loggedIn,
-            setLoggedIn
+            setLoggedIn,
+            checkLoggedIn
         }}>
             {children}
         </AuthContext.Provider>

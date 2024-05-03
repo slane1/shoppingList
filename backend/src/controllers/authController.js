@@ -39,6 +39,7 @@ export const login = async (req, res) => {
         const user = await User.findOne({
             email
         });
+        console.log(user);
         if (!user) {
             return res.status(400).json({ message: "User does not exist" });
         }
@@ -47,24 +48,22 @@ export const login = async (req, res) => {
             return res.status(400).json({ message: "Wrong password" });
         }
         // Create token
-        const accessToken = jwt.sign(
+        const token = jwt.sign(
             { id: user._id, username: user.username, email: user.email },
             process.env.JWT_SECRET,
             { expiresIn: "5d" }
         );
-        res.cookie("token", accessToken, {
+        const userId = user._id.toString();
+        res.cookie("token", token, {
             secure: false,
             maxAge: 3600000,
             path: "/",
         });
         res.json({
+            userId: userId,
+            username: user.username,
             message: "User logged in successfully",
-            token: accessToken,
-            user: {
-                username: user.username,
-                email: user.email,
-                id: user._id,
-            },
+            token: token,
         });
     }catch (err) {
         res.status(500).json({ message: err});
