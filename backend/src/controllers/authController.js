@@ -83,3 +83,13 @@ export const logout = async (req, res) => {
 };
 
 // authUser controller
+
+export const authUser = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id);
+        res.json(user);
+    }
+    catch (err) {
+        res.status(500).json({ message: err });
+    }
+}
