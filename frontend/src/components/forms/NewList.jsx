@@ -19,7 +19,8 @@ export default function NewList() {
     async function handleSubmit(event) {
         event.preventDefault();
         try {
-            await axios.post(`${backendUrl}/shopping-lists`, newList, { withCredentials: true });
+            console.log("newList:", newList);
+            await axios.post(`${backendUrl}/shopping-list`, newList, { withCredentials: true });
             setNewList({
                 title: "",
             });
