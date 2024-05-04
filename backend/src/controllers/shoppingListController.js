@@ -51,13 +51,12 @@ export const createShoppingList = async (req, res) => {
 
     // Get all shopping lists for user
     export const getShoppingLists = async (req, res) => {
-        const { userId } = req.body;
+        const userId = req.user._id;
         try {
             const user = await userModel.findById(userId);
             if (!user) {
                 return res.status(404).json({ message: 'User not found' });
             }
-
             const shoppingLists = await shoppingListModel.find({ _id: { $in: user.shoppingLists } });
             res.status(200).json(shoppingLists);
         }

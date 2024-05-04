@@ -21,8 +21,8 @@ export default function AddItem(id) {
 
     async function addItem(id, item) {
         try {
-            await axios.post(`${backendUrl}/item`, item);
-            fetchShoppingList();
+            await axios.post(`${backendUrl}/item`, item , { withCredentials: true });
+            await fetchShoppingList();
         } catch (error) {
             console.error('Error adding item:', error);
         }

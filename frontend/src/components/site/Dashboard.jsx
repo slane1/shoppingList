@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { DataContext }  from "../../contexts/DataContext";
 import { AuthContext } from "../../contexts/AuthContext";
 import LoggedOut from "../LoggedOut";
+import NewList from "../forms/NewList";
 import { Link } from "react-router-dom";
 
 export default function Dashboard() {
@@ -32,7 +33,7 @@ export default function Dashboard() {
                 </ul>
             </div>
             <div>
-                <button>Create a new Shopping List</button>
+                <NewList />
             </div>
         </div>
         }
