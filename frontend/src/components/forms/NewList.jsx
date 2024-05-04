@@ -10,7 +10,6 @@ export default function NewList() {
     const navigate = useNavigate();
     const [newList, setNewList] = useState({
         title: "",
-        items: []
     });
 
     function handleChange(event) {
@@ -22,10 +21,9 @@ export default function NewList() {
     async function handleSubmit(event) {
         event.preventDefault();
         try {
-            await axios.post(`${backendUrl}/shopping-lists`, newList);
+            await axios.post(`${backendUrl}/shopping-lists`, newList, { withCredentials: true });
             setNewList({
                 title: "",
-                items: []
             });
             fetchShoppingList();
             navigate('/');

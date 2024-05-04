@@ -3,18 +3,17 @@ import userModel from '../models/userModel.js';
 
 // Create new shopping list for user
 export const createShoppingList = async (req, res) => {
-    const { userId, listname } = req.body;
+    const { listname } = req.body;
+    const userId = req.user._id;
     try {
         const user = await userModel.findById(userId);
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
-
         const shoppingList = new shoppingListModel({ name: listname, items: [] });
         await shoppingList.save();
         user.shoppingLists.push(shoppingList);
         await user.save();
-
         res.status(201).json({ message: 'Shopping list created successfully' });
     }
     catch (error) {
