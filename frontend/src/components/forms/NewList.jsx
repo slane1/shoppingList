@@ -4,7 +4,7 @@ import axios from 'axios';
 import { DataContext } from '../../contexts/DataContext';
 
 export default function NewList() {
-    const { backendUrl } = useContext(DataContext);
+    const { backendUrl, fetchShoppingList } = useContext(DataContext);
     const navigate = useNavigate();
     const [newList, setNewList] = useState({
         title: "",

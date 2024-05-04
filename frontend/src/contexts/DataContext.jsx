@@ -61,7 +61,7 @@ export default function DataContextProvider({children}) {
 
     async function fetchShoppingList() {
         try {
-            const response = await axios.get(`${backendUrl}/shopping-lists`);
+            const response = await axios.get(`${backendUrl}/shopping-list`, { withCredentials: true });
             setShoppingLists(response.data);
             setLoading(false);
         } catch (error) {
@@ -88,7 +88,15 @@ export default function DataContextProvider({children}) {
 
     return (
         <DataContext.Provider 
-        value={{ shoppingLists, setShoppingLists, loading, setLoading, backendUrl, markItemDone, deleteItem, displayList, setDisplayList }}>
+        value={{ 
+            backendUrl, 
+            loading, 
+            displayList, 
+            shoppingLists, 
+            fetchShoppingList, 
+            markItemDone, 
+            deleteItem
+        }}>
             {children}
         </DataContext.Provider>
     )

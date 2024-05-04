@@ -6,7 +6,6 @@ export const createShoppingList = async (req, res) => {
     const newList  = req.body.title;
     console.log(newList);
     console.log("running createShoppingList");
-    const userId = req.user._id;
     try {
         const user = await userModel.findById(req.user.id);
         if (!user) {
@@ -29,7 +28,7 @@ export const createShoppingList = async (req, res) => {
     export const deleteShoppingList = async (req, res) => {
         const { userId, listId } = req.body;
         try {
-            const user = await userModel.findById(userId);
+            const user = await userModel.findById(req.user.id);
             if (!user) {
                 return res.status(404).json({ message: 'User not found' });
             }
@@ -53,13 +52,19 @@ export const createShoppingList = async (req, res) => {
 
     // Get all shopping lists for user
     export const getShoppingLists = async (req, res) => {
-        const userId = req.user._id;
         try {
-            const user = await userModel.findById(userId);
+            const user = await userModel.findById(req.user.id);
             if (!user) {
                 return res.status(404).json({ message: 'User not found' });
             }
-            const shoppingLists = await shoppingListModel.find({ _id: { $in: user.shoppingLists } });
+            const userLists = await shoppingListModel.find({ _id: { $in: user.shoppingLists } });
+            const shoppingLists = userLists.map(list => {
+                return {
+                    ...list._doc,
+                    title: list.name,
+                    id: list._id.toString()
+                };
+            });
             res.status(200).json(shoppingLists);
         }
         catch (error) {
