@@ -65,3 +65,19 @@ export const createShoppingList = async (req, res) => {
             res.status(500).json({ message: 'Internal server error' });
         }
     }
+
+    // Get shopping list by id
+    export const getShoppingListsId = async (req, res) => {
+        const { id } = req.params;
+        try {
+            const shoppingList = await shoppingListModel.findById(id);
+            if (!shoppingList) {
+                return res.status(404).json({ message: 'Shopping list not found' });
+            }
+            res.status(200).json(shoppingList);
+        }
+        catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Internal server error' });
+        }
+    }
