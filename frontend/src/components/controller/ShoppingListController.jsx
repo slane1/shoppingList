@@ -25,6 +25,17 @@ export default function ShoppingListController() {
         }
     }, [displayList]);
 
+    // functions
+    async function addItem(item) {
+        try {
+            await axios.post(`${backendUrl}/item`, item , { withCredentials: true });
+            await fetchShoppingList();
+        } catch (error) {
+            console.error('Error adding item:', error);
+        }
+    }
+
+    // handlers
     const handleGot = (number) => {
         console.log("Got item", number);
     }
@@ -33,13 +44,17 @@ export default function ShoppingListController() {
         console.log("Delete item", number);
     }
 
+    const handleAdd = (item) => {
+        console.log("Add item", item);
+    }
+
 
     return (
         <div>
             {!loggedIn ? <LoggedOut /> :
             <div>
                 <ShoppingList data={displayList} onGot={handleGot} onDelete={handleDelete}/> 
-                <AddItem id={displayList.id}/>           
+                <AddItem id={displayList.id} onAdd={handleAdd}/>           
             </div>
             }
         </div>
