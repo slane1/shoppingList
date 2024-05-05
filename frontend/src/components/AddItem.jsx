@@ -17,6 +17,12 @@ export default function AddItem(id) {
             [event.target.name]: event.target.value
         });
     }
+
+    async function handleAdd(event) {
+        event.preventDefault();
+        console.log("adding item", item);
+    }
+
     return (
         <div>
             <form action="">
@@ -24,7 +30,7 @@ export default function AddItem(id) {
                 <input type="text" name="name" id="name" onChange={handleChange}/>
                 <label htmlFor="quantity">Quantity</label>
                 <input type="number" name="quantity" id="quantity" onChange={handleChange}/>
-                <button type="submit" onClick={addItem(item)}>Add</button>
+                <button type="submit" onClick={handleAdd}>Add</button>
             </form>
         </div>
     )

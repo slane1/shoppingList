@@ -1,63 +1,24 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { useContext } from 'react';
+import { AuthContext } from './AuthContext';
 export const DataContext = createContext();
 
 export default function DataContextProvider({children}) {
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    console.log(backendUrl);
+    const { loggedIn } = useContext(AuthContext);
     const [loading, setLoading] = useState(true);
-    const [displayList, setDisplayList] = useState({
-        id: 1,
-        title: 'My Shopping List',
-        items: [
-            {
-                number: 1,
-                name: 'Apples',
-                quantity: 5,
-                done: false
-            },
-            {
-                number: 2,
-                name: 'Bananas',
-                quantity: 3,
-                done: true
-            }]
-    });
-    const [shoppingLists, setShoppingLists] = useState(
-    [{
-        id: 1,
-        title: 'My Shopping List',
-        items: [
-            {
-                number: 1,
-                name: 'Apples',
-                quantity: 5,
-                done: false
-            },
-            {
-                number: 2,
-                name: 'Bananas',
-                quantity: 3,
-                done: true
-            }]
-    },
-    {
-        id: 2,
-        title: 'My Shopping List 2',
-        items: [
-            {
-                number: 1,
-                name: 'B1',
-                quantity: 5,
-                done: false
-            },
-            {
-                number: 2,
-                name: 'B2',
-                quantity: 3,
-                done: true
-            }]
-    }]
-    );
+    const [displayList, setDisplayList] = useState({});
+    const [shoppingLists, setShoppingLists] = useState([]);
+
+    useEffect(() => {
+        console.log(loggedIn);
+        if (loggedIn) {
+            console.log("running useEffect in DataContextProvider");
+            fetchShoppingList();
+        }
+    }, [loggedIn]);
 
     async function fetchShoppingList() {
         try {
@@ -86,16 +47,26 @@ export default function DataContextProvider({children}) {
         }
     }
 
+    async function deleteList(id) {
+        try {
+            await axios.delete(`${backendUrl}/shopping-list/${id}`, { withCredentials: true });
+            fetchShoppingList();
+        } catch (error) {
+            console.error('Error deleting shopping list:', error);
+        }
+    }
+
     return (
         <DataContext.Provider 
         value={{ 
-            backendUrl, 
-            loading, 
-            displayList, 
             shoppingLists, 
-            fetchShoppingList, 
+            deleteList, 
             markItemDone, 
-            deleteItem
+            deleteItem, 
+            displayList, 
+            setDisplayList, 
+            loading,
+            backendUrl
         }}>
             {children}
         </DataContext.Provider>

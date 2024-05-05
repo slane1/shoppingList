@@ -5,12 +5,9 @@ export const AuthContext = createContext();
 
 export default function AuthProvider({children}) {
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
-    const [user, setUser] = useState({
-        id: 1,
-        username: "Username",
-        email: "mail@example.mail",
-    });
-    const [loggedIn, setLoggedIn] = useState(true);
+    console.log("backendUrl", backendUrl);
+    const [user, setUser] = useState({});
+    const [loggedIn, setLoggedIn] = useState(false);
 
     async function checkLoggedIn() {
         console.log("Checking logged in");

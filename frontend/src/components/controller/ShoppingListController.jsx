@@ -44,17 +44,13 @@ export default function ShoppingListController() {
         console.log("Delete item", number);
     }
 
-    const handleAdd = (item) => {
-        console.log("Add item", item);
-    }
-
 
     return (
         <div>
             {!loggedIn ? <LoggedOut /> :
             <div>
                 <ShoppingList data={displayList} onGot={handleGot} onDelete={handleDelete}/> 
-                <AddItem id={displayList.id} onAdd={handleAdd}/>           
+                <AddItem id={displayList.id} />           
             </div>
             }
         </div>

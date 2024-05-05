@@ -26,20 +26,20 @@ export const createShoppingList = async (req, res) => {
 
     // Delete shopping list for user
     export const deleteShoppingList = async (req, res) => {
-        const { userId, listId } = req.body;
+        const { id } = req.params;
         try {
             const user = await userModel.findById(req.user.id);
             if (!user) {
                 return res.status(404).json({ message: 'User not found' });
             }
 
-            const shoppingList = await shoppingListModel.findById(listId);
+            const shoppingList = await shoppingListModel.findById(id);
             if (!shoppingList) {
                 return res.status(404).json({ message: 'Shopping list not found' });
             }
 
-            await shoppingList.delete();
-            user.shoppingLists = user.shoppingLists.filter(list => list._id !== listId);
+            await shoppingListModel.deleteOne({ _id: id });
+            user.shoppingLists = user.shoppingLists.filter(list => list._id !== id);
             await user.save();
 
             res.status(200).json({ message: 'Shopping list deleted successfully' });

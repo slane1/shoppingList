@@ -21,10 +21,7 @@ export default function LoginForm() {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            const { data } = await axios.post(
-                `${backendUrl}/auth/login`, 
-                login,
-                { withCredentials: true });
+            const { data } = await axios.post(`${backendUrl}/auth/login`, login,{ withCredentials: true });
             if (data.token) {
                 const token = data.token;
                 localStorage.setItem('token', token);

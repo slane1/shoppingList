@@ -7,12 +7,13 @@ import axios from 'axios';
 export default function LogoutForm() {
     const navigate = useNavigate();
     const { backendUrl } = useContext(DataContext);
+    console.log(backendUrl, "logout form");
     const { checkLoggedIn } = useContext(AuthContext);
 
     async function handleSubmit(event) {
         event.preventDefault();
         try {
-            await axios.post(`${backendUrl}/auth/logout`, {}, { withCredentials: true });
+            await axios.post(`${backendUrl}/auth/logout`, { withCredentials: true });
             await checkLoggedIn();
             navigate('/');
         } catch (error) {

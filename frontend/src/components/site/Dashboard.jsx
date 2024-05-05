@@ -6,7 +6,7 @@ import NewList from "../forms/NewList";
 import { Link } from "react-router-dom";
 
 export default function Dashboard() {
-    const { shoppingLists } = useContext(DataContext);
+    const { shoppingLists, deleteList } = useContext(DataContext);
     const { loggedIn } = useContext(AuthContext);
 
     return (
@@ -28,6 +28,7 @@ export default function Dashboard() {
                         >
                         {data.title}
                         </Link>
+                        <button onClick={() => deleteList(data.id)}>Delete</button>
                     </li>
                 ))}
                 </ul>

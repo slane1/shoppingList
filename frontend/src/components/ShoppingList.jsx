@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 export default function ShoppingList({data, onGot, onDelete}) {
-    if (!data) {
+    if (!data.items) {
         return (
             <>
             <h1>Error loading Shopping List</h1>
