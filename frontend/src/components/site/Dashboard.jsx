@@ -24,8 +24,9 @@ export default function Dashboard() {
                         <li key={data.id}>
                         <Link
                         to={{pathname: `/shopping-list/${data.id}`,}}
-                        state={{ data: data}}
+                        state={{ data: data.id}}
                         >
+                        {console.log(data.id)}
                         {data.title}
                         </Link>
                         <button onClick={() => deleteList(data.id)}>Delete</button>

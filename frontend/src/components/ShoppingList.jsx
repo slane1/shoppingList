@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 export default function ShoppingList({data, onGot, onDelete}) {
+    console.log("Logging data items", data.items);
     if (!data.items) {
         return (
             <>
@@ -14,12 +15,12 @@ export default function ShoppingList({data, onGot, onDelete}) {
             <h1>{data.title}</h1>
             <ul>
                 {data.items.map((item) => (
-                    <li key={item.number}>
+                    <li key={item._id}>
                         <div>
                         <p>{item.name}</p>
                         <p>{item.quantity}</p>
-                        <button onClick={() => onGot(item)}>Got</button>
-                        <button onClick={() => onDelete(item)}>X</button>
+                        <button onClick={() => onGot(item._id)}>Got</button>
+                        <button onClick={() => onDelete(item._id)}>X</button>
                         </div>
                     </li>
                 ))}

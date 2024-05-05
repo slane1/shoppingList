@@ -77,7 +77,7 @@ export const createShoppingList = async (req, res) => {
     export const getShoppingListsId = async (req, res) => {
         const { id } = req.params;
         try {
-            const shoppingList = await shoppingListModel.findById(id);
+            const shoppingList = await shoppingListModel.findById(id).populate('items');
             if (!shoppingList) {
                 return res.status(404).json({ message: 'Shopping list not found' });
             }

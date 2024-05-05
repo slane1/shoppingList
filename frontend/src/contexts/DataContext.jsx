@@ -66,7 +66,8 @@ export default function DataContextProvider({children}) {
             displayList, 
             setDisplayList, 
             loading,
-            backendUrl
+            backendUrl,
+            fetchShoppingList
         }}>
             {children}
         </DataContext.Provider>

@@ -4,6 +4,8 @@ import itemModel from "../models/itemModel.js";
 // Create new item for shopping list
 export const createItem = async (req, res) => {
     const { shoppingListId, name, quantity, done } = req.body;
+    console.log("Running Item create");
+    console.log(req.body);
     try {
         const shoppingList = await shoppingListModel.findById(shoppingListId);
         if (!shoppingList) {
