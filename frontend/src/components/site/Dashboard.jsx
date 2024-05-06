@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { DataContext }  from "../../contexts/DataContext";
 import { AuthContext } from "../../contexts/AuthContext";
-import LoggedOut from "../LoggedOut";
+import LoggedOut from "../site/LoggedOut";
 import NewList from "../forms/NewList";
 import { Link } from "react-router-dom";
 

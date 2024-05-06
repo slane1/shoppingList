@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
-import { DataContext } from '../contexts/DataContext';
-import { AuthContext } from '../contexts/AuthContext';
+import { DataContext } from '../../contexts/DataContext';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export default function AddItem(props) {
     console.log("Running AddItem with id:", props.id);
-    const { backendUrl } = useContext(DataContext);
+    const { backendUrl, refreshDisplayList } = useContext(DataContext);
     const { loggedIn } = useContext(AuthContext);
     const [item, setItem] = useState({
         name: "",
@@ -28,6 +28,7 @@ export default function AddItem(props) {
                 quantity: 0,
                 done: false
             });
+            await refreshDisplayList(props.id);
         }
         catch (error) {
             console.error('Error adding item:', error);

@@ -12,6 +12,7 @@ export default function DataContextProvider({children}) {
     const [displayList, setDisplayList] = useState({});
     const [shoppingLists, setShoppingLists] = useState([]);
 
+    // Check if user is logged in and fetch shopping lists if they are
     useEffect(() => {
         console.log(loggedIn);
         if (loggedIn) {
@@ -20,6 +21,7 @@ export default function DataContextProvider({children}) {
         }
     }, [loggedIn]);
 
+    // Fetch shopping lists
     async function fetchShoppingList() {
         try {
             const response = await axios.get(`${backendUrl}/shopping-list`, { withCredentials: true });
@@ -29,24 +31,43 @@ export default function DataContextProvider({children}) {
             console.error('Error fetching shopping list:', error);
         }
     }
-
-    async function markItemDone(id, number) {
+    // refresh display list
+    async function refreshDisplayList() {
         try {
-            await axios.put(`${backendUrl}/item/${number}`);
-            fetchShoppingList();
+            await axios.get(`${backendUrl}/shopping-list/${displayList._id}`, { withCredentials: true })
+            .then((response) => {
+                setDisplayList(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
         } catch (error) {
-            console.error('Error marking item done:', error);
+            console.error('Error refreshing display list:', error);
         }
     }
-    async function deleteItem(id, number) {
+
+    // Item functions, mark item done, delete item
+    async function handleGot(number, listId) {
         try {
-            await axios.delete(`${backendUrl}/item/${number}`);
-            fetchShoppingList();
+            await axios.put(`${backendUrl}/item/got/${number}`, { withCredentials: true });
+            await fetchShoppingList();
+            await refreshDisplayList(listId);
+        } catch (error) {
+            console.error('Error updating item:', error);
+        }
+    }
+    async function handleDelete(number, listId) {
+        console.log("Running handleDelete with number:", number);
+        try {
+            await axios.delete(`${backendUrl}/item/${number}`, { withCredentials: true });
+            await fetchShoppingList();
+            await refreshDisplayList(listId);
         } catch (error) {
             console.error('Error deleting item:', error);
         }
     }
 
+    // Shopping list functions
     async function deleteList(id) {
         try {
             await axios.delete(`${backendUrl}/shopping-list/${id}`, { withCredentials: true });
@@ -61,13 +82,14 @@ export default function DataContextProvider({children}) {
         value={{ 
             shoppingLists, 
             deleteList, 
-            markItemDone, 
-            deleteItem, 
             displayList, 
             setDisplayList, 
             loading,
             backendUrl,
-            fetchShoppingList
+            fetchShoppingList,
+            handleGot,
+            handleDelete,
+            refreshDisplayList
         }}>
             {children}
         </DataContext.Provider>

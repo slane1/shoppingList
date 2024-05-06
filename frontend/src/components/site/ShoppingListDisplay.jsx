@@ -3,20 +3,21 @@ import { DataContext } from "../../contexts/DataContext";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import Header from "./Header";
+import Footer from "./Footer";
 import ShoppingList from "../ShoppingList";
-import AddItem from "../AddItem";
-import LoggedOut from "../LoggedOut";
+import AddItem from "../forms/AddItem";
+import LoggedOut from "./LoggedOut";
 
-export default function ShoppingListController(props) {
+export default function ShoppingListDisplay(props) {
     const { loggedIn } = useContext(AuthContext);
-    const { backendUrl, displayList, setDisplayList } = useContext(DataContext);
+    const { backendUrl, displayList, setDisplayList, fetchShoppingList } = useContext(DataContext);
     const location = useLocation();
 
     useEffect(() => {
         if (!props.data !== location.pathname.split("/")[2]) {
             axios.get(`${backendUrl}/shopping-list/${location.pathname.split("/")[2]}`, { withCredentials: true })
             .then((response) => {
-                console.log(response.data);
                 setDisplayList(response.data);
             })
             .catch((error) => {
@@ -37,23 +38,18 @@ export default function ShoppingListController(props) {
         }
     }
 
-    // handlers
-    async function handleGot(number) {
+    // refresh display list
+    async function refreshDisplayList() {
         try {
-            await axios.put(`${backendUrl}/item/got/${number}`, { withCredentials: true });
-            await fetchShoppingList();
+            await axios.get(`${backendUrl}/shopping-list/${displayList._id}`, { withCredentials: true })
+            .then((response) => {
+                setDisplayList(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
         } catch (error) {
-            console.error('Error updating item:', error);
-        }
-    }
-
-    async function handleDelete(number) {
-        console.log("Running handleDelete with number:", number);
-        try {
-            await axios.delete(`${backendUrl}/item/${number}`, { withCredentials: true });
-            await fetchShoppingList();
-        } catch (error) {
-            console.error('Error deleting item:', error);
+            console.error('Error refreshing display list:', error);
         }
     }
 
@@ -62,8 +58,10 @@ export default function ShoppingListController(props) {
         <div>
             {!loggedIn ? <LoggedOut /> :
             <div>
-                <ShoppingList data={displayList} onGot={handleGot} onDelete={handleDelete}/> 
-                <AddItem id={displayList._id} />           
+                <Header />
+                <ShoppingList data={displayList} listId={displayList._id}/> 
+                <AddItem id={displayList._id} />  
+                <Footer />         
             </div>
             }
         </div>
