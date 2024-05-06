@@ -5,7 +5,6 @@ import User from '../models/userModel.js';
 // Registration controller
 export const register = async (req, res) => {
     const { username, email, password } = req.body;
-    console.log(req.body);
     try {
         const hashedPassword = await bcrypt.hash(password, 12);
 
@@ -39,7 +38,6 @@ export const login = async (req, res) => {
         const user = await User.findOne({
             email
         });
-        console.log(user);
         if (!user) {
             return res.status(400).json({ message: "User does not exist" });
         }
