@@ -54,7 +54,7 @@ export const login = async (req, res) => {
         const userId = user._id.toString();
         res.cookie("token", token, {
             secure: false,
-            maxAge: 3600000,
+            maxAge: 5 * 24 * 60 * 60 * 1000,
             path: "/",
         });
         res.json({
