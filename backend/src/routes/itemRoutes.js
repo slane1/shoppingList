@@ -9,7 +9,7 @@ router.post("/", verifyToken, createItem);
 
 
 // PUT /item/:id
-router.put("/:id", verifyToken, updateItem);
+router.post("/:id", verifyToken, updateItem);
 router.put("/got/:id", verifyToken, gotItem);
 
 

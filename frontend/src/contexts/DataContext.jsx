@@ -49,13 +49,15 @@ export default function DataContextProvider({children}) {
     // Item functions, mark item done, delete item
     async function handleGot(number, listId) {
         try {
-            await axios.put(`${backendUrl}/item/got/${number}`, { withCredentials: true });
+            await axios.put(`${backendUrl}/item/got/${number}`, number, { withCredentials: true }
+            );
             await fetchShoppingList();
             await refreshDisplayList(listId);
         } catch (error) {
             console.error('Error updating item:', error);
         }
     }
+
     async function handleDelete(number, listId) {
         console.log("Running handleDelete with number:", number);
         try {
