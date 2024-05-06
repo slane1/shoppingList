@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { DataContext } from "../../contexts/DataContext";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useLocation } from "react-router-dom";
@@ -11,7 +11,7 @@ import LoggedOut from "./LoggedOut";
 
 export default function ShoppingListDisplay(props) {
     const { loggedIn } = useContext(AuthContext);
-    const { backendUrl, displayList, setDisplayList, fetchShoppingList } = useContext(DataContext);
+    const { backendUrl, displayList, setDisplayList } = useContext(DataContext);
     const location = useLocation();
 
     useEffect(() => {
