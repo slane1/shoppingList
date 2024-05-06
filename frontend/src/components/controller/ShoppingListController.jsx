@@ -11,10 +11,6 @@ export default function ShoppingListController(props) {
     const { loggedIn } = useContext(AuthContext);
     const { backendUrl, displayList, setDisplayList } = useContext(DataContext);
     const location = useLocation();
-    console.log("Running ShoppingListController with location:", location);
-    console.log("Running ShoppingListController with displayList:", displayList);
-    console.log("Running ShoppingListController with displaylistID:", displayList._id);
-    console.log("Running ShoppingListController with props:", location.state.data);
 
     useEffect(() => {
         if (!props.data !== location.pathname.split("/")[2]) {
