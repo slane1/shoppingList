@@ -28,31 +28,6 @@ export default function ShoppingListDisplay(props) {
         }
     }, []);
 
-    // functions
-    async function addItem(item) {
-        try {
-            await axios.post(`${backendUrl}/item`, item , { withCredentials: true });
-            await fetchShoppingList();
-        } catch (error) {
-            console.error('Error adding item:', error);
-        }
-    }
-
-    // refresh display list
-    async function refreshDisplayList() {
-        try {
-            await axios.get(`${backendUrl}/shopping-list/${displayList._id}`, { withCredentials: true })
-            .then((response) => {
-                setDisplayList(response.data);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-        } catch (error) {
-            console.error('Error refreshing display list:', error);
-        }
-    }
-
 
     return (
         <div>
