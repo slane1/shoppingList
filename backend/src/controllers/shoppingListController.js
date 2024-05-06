@@ -1,4 +1,5 @@
 import shoppingListModel from '../models/shoppingListModel.js';
+import { deleteItemWithList } from './ItemController.js';
 import userModel from '../models/userModel.js';
 
 // Create new shopping list for user
@@ -36,6 +37,9 @@ export const createShoppingList = async (req, res) => {
             const shoppingList = await shoppingListModel.findById(id);
             if (!shoppingList) {
                 return res.status(404).json({ message: 'Shopping list not found' });
+            }
+            for (const item of shoppingList.items) {
+                await deleteItemWithList({ _id: item });
             }
             await user.updateOne({ $pull: { shoppingLists: id } });
             await shoppingListModel.deleteOne({ _id: id });

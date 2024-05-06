@@ -62,3 +62,18 @@ export const deleteItem = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
+
+// Delete Items with ListDeletion
+export const deleteItemWithList = async (id) => {
+    try {
+        const item = await itemModel.findById(id);
+        if (!item) {
+            throw new Error('Item not found');
+        }
+        await shoppingListModel.updateMany({ $pull: { items: id } });
+        await item.deleteOne({ _id: id });
+        return { message: 'Item deleted' };
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
