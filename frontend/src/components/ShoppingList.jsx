@@ -19,6 +19,7 @@ export default function ShoppingList({data, onGot, onDelete}) {
                         <div>
                         <p>{item.name}</p>
                         <p>{item.quantity}</p>
+                        {item.done ? <p>Got</p> : <p>Not Got</p>}
                         <button onClick={() => onGot(item._id)}>Got</button>
                         <button onClick={() => onDelete(item._id)}>X</button>
                         </div>
