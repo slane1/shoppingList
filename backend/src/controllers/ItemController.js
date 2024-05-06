@@ -46,14 +46,16 @@ export const updateItem = async (req, res) => {
 
 // Delete item
 export const deleteItem = async (req, res) => {
+    console.log("running deleteItem", req.params);
     const { id } = req.params;
     try {
         const item = await itemModel.findById(id);
         if (!item) {
             return res.status(404).json({ message: 'Item not found' });
         }
-
-        await item.remove();
+        await shoppingListModel.updateMany({ $pull: { items: id } }
+        );
+        await item.deleteOne({ _id: id });
         res.json({ message: 'Item deleted' });
     }
     catch (error) {

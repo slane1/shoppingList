@@ -37,7 +37,7 @@ export const createShoppingList = async (req, res) => {
             if (!shoppingList) {
                 return res.status(404).json({ message: 'Shopping list not found' });
             }
-
+            await user.updateOne({ $pull: { shoppingLists: id } });
             await shoppingListModel.deleteOne({ _id: id });
             user.shoppingLists = user.shoppingLists.filter(list => list._id !== id);
             await user.save();

@@ -42,12 +42,23 @@ export default function ShoppingListController(props) {
     }
 
     // handlers
-    const handleGot = (number) => {
-        console.log("Got item", number);
+    async function handleGot(number) {
+        try {
+            await axios.put(`${backendUrl}/item/${number}`, { withCredentials: true });
+            await fetchShoppingList();
+        } catch (error) {
+            console.error('Error updating item:', error);
+        }
     }
 
-    const handleDelete = (number) => {
-        console.log("Delete item", number);
+    async function handleDelete(number) {
+        console.log("Running handleDelete with number:", number);
+        try {
+            await axios.delete(`${backendUrl}/item/${number}`, { withCredentials: true });
+            await fetchShoppingList();
+        } catch (error) {
+            console.error('Error deleting item:', error);
+        }
     }
 
 
