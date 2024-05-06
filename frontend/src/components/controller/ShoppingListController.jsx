@@ -44,7 +44,7 @@ export default function ShoppingListController(props) {
     // handlers
     async function handleGot(number) {
         try {
-            await axios.put(`${backendUrl}/item/${number}`, { withCredentials: true });
+            await axios.put(`${backendUrl}/item/got/${number}`, { withCredentials: true });
             await fetchShoppingList();
         } catch (error) {
             console.error('Error updating item:', error);

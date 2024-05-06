@@ -44,6 +44,24 @@ export const updateItem = async (req, res) => {
     }
 }
 
+// Update item done or not done
+export const gotItem = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const item = await itemModel.findById(id);
+        if (!item) {
+            return res.status(404).json({ message: 'Item not found' });
+        }
+        item.done = !item.done;
+        await item.save();
+        res.json(item);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+
 // Delete item
 export const deleteItem = async (req, res) => {
     console.log("running deleteItem", req.params);
