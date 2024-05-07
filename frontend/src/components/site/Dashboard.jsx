@@ -3,6 +3,8 @@ import { DataContext }  from "../../contexts/DataContext";
 import { AuthContext } from "../../contexts/AuthContext";
 import LoggedOut from "../site/LoggedOut";
 import NewList from "../forms/NewList";
+import Header from "../site/Header";
+import Footer from "../site/Footer";
 import { Link } from "react-router-dom";
 
 export default function Dashboard() {
@@ -11,7 +13,9 @@ export default function Dashboard() {
 
     return (
     <>
-        {!loggedIn ? <LoggedOut /> : 
+        {!loggedIn ? <LoggedOut /> :
+        <>
+        <Header />
         <div>
             <div>
                 <h1>Dashboard</h1>
@@ -38,6 +42,8 @@ export default function Dashboard() {
                 <NewList />
             </div>
         </div>
+        <Footer />
+        </> 
         }
     </>
     );
