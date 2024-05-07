@@ -6,6 +6,7 @@ import NewList from "../forms/NewList";
 import Header from "../site/Header";
 import Footer from "../site/Footer";
 import { Link } from "react-router-dom";
+import deletesvg from "../../assets/trash-solid.svg";
 
 export default function Dashboard() {
     const { shoppingLists, deleteList } = useContext(DataContext);
@@ -33,7 +34,9 @@ export default function Dashboard() {
                         {console.log(data.id)}
                         {data.title}
                         </Link>
-                        <button onClick={() => deleteList(data.id)}>Delete</button>
+                        <button onClick={() => deleteList(data.id)}>
+                            <img src={deletesvg} alt="Delete" />
+                        </button>
                     </li>
                 ))}
                 </ul>

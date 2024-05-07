@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { DataContext } from "../contexts/DataContext";
 import { Link } from "react-router-dom";
+import deletesvg from "../assets/trash-solid.svg";  
+import gotsvg from "../assets/check-solid.svg";
 
 export default function ShoppingList({data, listId}) {
     const { loggedIn } = useContext(AuthContext);
@@ -26,9 +28,12 @@ export default function ShoppingList({data, listId}) {
                         <p>{item.name}</p>
                         <p>{item.quantity}</p>
                         {item.done ? <p>Got</p> : <p>Not Got</p>}
-                        <button onClick={() => handleGot(item._id, listId)}>Got</button>
-                        <button onClick={() => handleDelete(item._id, listId)
-                        }>X</button>
+                        <button onClick={() => handleGot(item._id, listId)}>
+                            <img src={gotsvg} alt="Got" />
+                        </button>
+                        <button onClick={() => handleDelete(item._id, listId)}>
+                            <img src={deletesvg} alt="Delete" />
+                        </button>
                         </div>
                     </li>
                 ))}
