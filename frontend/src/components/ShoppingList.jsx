@@ -1,7 +1,14 @@
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
+import { DataContext } from "../contexts/DataContext";
 import { Link } from "react-router-dom";
 
-export default function ShoppingList({data, onGot, onDelete}) {
-    if (!data) {
+export default function ShoppingList({data, listId}) {
+    const { loggedIn } = useContext(AuthContext);
+    const { handleGot, handleDelete } = useContext(DataContext);
+
+    console.log("Logging data items", data.items);
+    if (!data.items) {
         return (
             <>
             <h1>Error loading Shopping List</h1>
@@ -14,12 +21,14 @@ export default function ShoppingList({data, onGot, onDelete}) {
             <h1>{data.title}</h1>
             <ul>
                 {data.items.map((item) => (
-                    <li key={item.number}>
+                    <li key={item._id}>
                         <div>
                         <p>{item.name}</p>
                         <p>{item.quantity}</p>
-                        <button onClick={() => onGot(item)}>Got</button>
-                        <button onClick={() => onDelete(item)}>X</button>
+                        {item.done ? <p>Got</p> : <p>Not Got</p>}
+                        <button onClick={() => handleGot(item._id, listId)}>Got</button>
+                        <button onClick={() => handleDelete(item._id, listId)
+                        }>X</button>
                         </div>
                     </li>
                 ))}

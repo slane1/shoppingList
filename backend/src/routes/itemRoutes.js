@@ -1,4 +1,4 @@
-import { createItem, updateItem, deleteItem } from "../controllers/ItemController.js";
+import { createItem, updateItem, deleteItem, gotItem } from "../controllers/ItemController.js";
 import express from "express";
 import verifyToken from "../middleware/verifyToken.js";
 
@@ -9,7 +9,8 @@ router.post("/", verifyToken, createItem);
 
 
 // PUT /item/:id
-router.put("/:id", verifyToken, updateItem);
+router.post("/:id", verifyToken, updateItem);
+router.put("/got/:id", verifyToken, gotItem);
 
 
 // DELETE /item/:id

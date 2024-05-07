@@ -1,16 +1,21 @@
 import { useContext } from "react";
 import { DataContext }  from "../../contexts/DataContext";
 import { AuthContext } from "../../contexts/AuthContext";
-import LoggedOut from "../LoggedOut";
+import LoggedOut from "../site/LoggedOut";
+import NewList from "../forms/NewList";
+import Header from "../site/Header";
+import Footer from "../site/Footer";
 import { Link } from "react-router-dom";
 
 export default function Dashboard() {
-    const { shoppingLists } = useContext(DataContext);
+    const { shoppingLists, deleteList } = useContext(DataContext);
     const { loggedIn } = useContext(AuthContext);
 
     return (
     <>
-        {!loggedIn ? <LoggedOut /> : 
+        {!loggedIn ? <LoggedOut /> :
+        <>
+        <Header />
         <div>
             <div>
                 <h1>Dashboard</h1>
@@ -23,18 +28,22 @@ export default function Dashboard() {
                         <li key={data.id}>
                         <Link
                         to={{pathname: `/shopping-list/${data.id}`,}}
-                        state={{ data: data}}
+                        state={{ data: data.id}}
                         >
+                        {console.log(data.id)}
                         {data.title}
                         </Link>
+                        <button onClick={() => deleteList(data.id)}>Delete</button>
                     </li>
                 ))}
                 </ul>
             </div>
             <div>
-                <button>Create a new Shopping List</button>
+                <NewList />
             </div>
         </div>
+        <Footer />
+        </> 
         }
     </>
     );

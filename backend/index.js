@@ -1,4 +1,5 @@
 import express from 'express';
+import cookieParser from "cookie-parser";
 import dotenv from 'dotenv';
 import "./src/database/database.js";
 import cors from 'cors';
@@ -18,6 +19,7 @@ app.use(cors(
         credentials: true,
     }
 ));
+app.use(cookieParser());
 
 // routes
 app.use("/auth", authRoutes)

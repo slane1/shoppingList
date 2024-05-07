@@ -2,15 +2,12 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { DataContext } from '../../contexts/DataContext';
-import Header from '../site/Header';
-import Footer from '../site/Footer';
 
 export default function NewList() {
-    const { backendUrl } = useContext(DataContext);
+    const { backendUrl, fetchShoppingList } = useContext(DataContext);
     const navigate = useNavigate();
     const [newList, setNewList] = useState({
         title: "",
-        items: []
     });
 
     function handleChange(event) {
@@ -22,13 +19,12 @@ export default function NewList() {
     async function handleSubmit(event) {
         event.preventDefault();
         try {
-            await axios.post(`${backendUrl}/shopping-lists`, newList);
+            console.log("newList:", newList);
+            await axios.post(`${backendUrl}/shopping-list`, newList, { withCredentials: true });
             setNewList({
                 title: "",
-                items: []
             });
             fetchShoppingList();
-            navigate('/');
         } catch (error) {
             console.error('Error creating new list:', error);
         }
@@ -39,7 +35,6 @@ export default function NewList() {
 
     return (
         <div>
-            <Header />
             <div>
                 <form action="">
                     <label htmlFor="title">Title:</label>
@@ -47,7 +42,6 @@ export default function NewList() {
                     <button type='submit' onClick={handleSubmit}>Add</button>
                 </form>
             </div>
-            <Footer />
         </div>
     )
 }

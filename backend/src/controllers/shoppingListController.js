@@ -1,20 +1,21 @@
 import shoppingListModel from '../models/shoppingListModel.js';
+import { deleteItemWithList } from './ItemController.js';
 import userModel from '../models/userModel.js';
 
 // Create new shopping list for user
 export const createShoppingList = async (req, res) => {
-    const { userId, listname } = req.body;
+    const newList  = req.body.title;
+    console.log(newList);
+    console.log("running createShoppingList");
     try {
-        const user = await userModel.findById(userId);
+        const user = await userModel.findById(req.user.id);
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
-
-        const shoppingList = new shoppingListModel({ name: listname, items: [] });
+        const shoppingList = new shoppingListModel({ name: newList, items: [] });
         await shoppingList.save();
         user.shoppingLists.push(shoppingList);
         await user.save();
-
         res.status(201).json({ message: 'Shopping list created successfully' });
     }
     catch (error) {
@@ -26,20 +27,23 @@ export const createShoppingList = async (req, res) => {
 
     // Delete shopping list for user
     export const deleteShoppingList = async (req, res) => {
-        const { userId, listId } = req.body;
+        const { id } = req.params;
         try {
-            const user = await userModel.findById(userId);
+            const user = await userModel.findById(req.user.id);
             if (!user) {
                 return res.status(404).json({ message: 'User not found' });
             }
 
-            const shoppingList = await shoppingListModel.findById(listId);
+            const shoppingList = await shoppingListModel.findById(id);
             if (!shoppingList) {
                 return res.status(404).json({ message: 'Shopping list not found' });
             }
-
-            await shoppingList.delete();
-            user.shoppingLists = user.shoppingLists.filter(list => list._id !== listId);
+            for (const item of shoppingList.items) {
+                await deleteItemWithList({ _id: item });
+            }
+            await user.updateOne({ $pull: { shoppingLists: id } });
+            await shoppingListModel.deleteOne({ _id: id });
+            user.shoppingLists = user.shoppingLists.filter(list => list._id !== id);
             await user.save();
 
             res.status(200).json({ message: 'Shopping list deleted successfully' });
@@ -52,15 +56,36 @@ export const createShoppingList = async (req, res) => {
 
     // Get all shopping lists for user
     export const getShoppingLists = async (req, res) => {
-        const { userId } = req.body;
         try {
-            const user = await userModel.findById(userId);
+            const user = await userModel.findById(req.user.id);
             if (!user) {
                 return res.status(404).json({ message: 'User not found' });
             }
-
-            const shoppingLists = await shoppingListModel.find({ _id: { $in: user.shoppingLists } });
+            const userLists = await shoppingListModel.find({ _id: { $in: user.shoppingLists } });
+            const shoppingLists = userLists.map(list => {
+                return {
+                    ...list._doc,
+                    title: list.name,
+                    id: list._id.toString()
+                };
+            });
             res.status(200).json(shoppingLists);
+        }
+        catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Internal server error' });
+        }
+    }
+
+    // Get shopping list by id
+    export const getShoppingListsId = async (req, res) => {
+        const { id } = req.params;
+        try {
+            const shoppingList = await shoppingListModel.findById(id).populate('items');
+            if (!shoppingList) {
+                return res.status(404).json({ message: 'Shopping list not found' });
+            }
+            res.status(200).json(shoppingList);
         }
         catch (error) {
             console.error(error);

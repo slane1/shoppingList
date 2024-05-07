@@ -1,32 +1,48 @@
 import React, { createContext, useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
+import axios from 'axios';
 export const AuthContext = createContext();
 
 export default function AuthProvider({children}) {
-    const [user, setUser] = useState({
-        id: 1,
-        username: "Username",
-        email: "mail@example.mail",
-    });
-    const [loggedIn, setLoggedIn] = useState(true);
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    console.log("backendUrl", backendUrl);
+    const [user, setUser] = useState({});
+    const [loggedIn, setLoggedIn] = useState(false);
 
     async function checkLoggedIn() {
+        console.log("Checking logged in");
         try {
-            const response = await fetch("/auth/auth-user");
-            const data = await response.json();
-            if (data) {
-                setUser(data);
-                setLoggedIn(true);
-            } else {
-                setUser({});
-                setLoggedIn(false);
-            }
-        } catch (err) {
-            console.error(err);
+            const response = await axios.get(`${backendUrl}/auth/auth-user`, {
+                withCredentials: true
+        });
+        if (response.data) {
+            console.log("setting user", response.data);
+            setUser({
+                id: response.data._id,
+                username: response.data.name,
+                email: response.data.email
+            });
+            setLoggedIn(true);
+        } else {
+            console.log("no user found");
+            setLoggedIn(false);
+            setUser({});
         }
     }
+    catch (err) {
+        console.log("error");
+        console.error(err);
+        setLoggedIn(false);
+        setUser({});
+    }}
 
     useEffect(() => {
-        checkLoggedIn();
+        const token = Cookies.get('token');
+        if (token) {
+            checkLoggedIn();
+        } else {
+            setLoggedIn(false);
+        }
     }, []);
     
     return (
@@ -34,7 +50,8 @@ export default function AuthProvider({children}) {
             user,
             setUser,
             loggedIn,
-            setLoggedIn
+            setLoggedIn,
+            checkLoggedIn
         }}>
             {children}
         </AuthContext.Provider>

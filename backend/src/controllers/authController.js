@@ -5,7 +5,6 @@ import User from '../models/userModel.js';
 // Registration controller
 export const register = async (req, res) => {
     const { username, email, password } = req.body;
-    console.log(req.body);
     try {
         const hashedPassword = await bcrypt.hash(password, 12);
 
@@ -47,24 +46,22 @@ export const login = async (req, res) => {
             return res.status(400).json({ message: "Wrong password" });
         }
         // Create token
-        const accessToken = jwt.sign(
+        const token = jwt.sign(
             { id: user._id, username: user.username, email: user.email },
             process.env.JWT_SECRET,
             { expiresIn: "5d" }
         );
-        res.cookie("token", accessToken, {
+        const userId = user._id.toString();
+        res.cookie("token", token, {
             secure: false,
-            maxAge: 3600000,
+            maxAge: 5 * 24 * 60 * 60 * 1000,
             path: "/",
         });
         res.json({
+            userId: userId,
+            username: user.username,
             message: "User logged in successfully",
-            token: accessToken,
-            user: {
-                username: user.username,
-                email: user.email,
-                id: user._id,
-            },
+            token: token,
         });
     }catch (err) {
         res.status(500).json({ message: err});
@@ -83,3 +80,13 @@ export const logout = async (req, res) => {
 };
 
 // authUser controller
+
+export const authUser = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id);
+        res.json(user);
+    }
+    catch (err) {
+        res.status(500).json({ message: err });
+    }
+}
