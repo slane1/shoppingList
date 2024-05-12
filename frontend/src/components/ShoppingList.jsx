@@ -20,15 +20,14 @@ export default function ShoppingList({data, listId}) {
     } else {
     return (
         <div>
-            <h1>{data.title}</h1>
+            <h1>{data.name}</h1>
             <ul>
                 {data.items.map((item) => (
-                    <li key={item._id}>
+                    <li key={item._id} >
                         <div>
-                        <p>{item.name}</p>
+                        {item.done ? <p>{item.name}</p> : <p>{item.name}</p>}
                         <p>{item.quantity}</p>
-                        {item.done ? <p>Got</p> : <p>Not Got</p>}
-                        <button onClick={() => handleGot(item._id, listId)}>
+                        <button  onClick={() => handleGot(item._id, listId)}>
                             <img src={gotsvg} alt="Got" />
                         </button>
                         <button onClick={() => handleDelete(item._id, listId)}>

@@ -37,8 +37,8 @@ export default function NewList() {
     return (
         <div>
             <div>
-                <form action="">
-                    <label htmlFor="title">Title:</label>
+                <form>
+                    <label htmlFor="title">Title</label>
                     <input type="text" id="title" name="title" value={newList.title} onChange={handleChange} />
                     <button type='submit' onClick={handleSubmit}><img src={add} alt="" /></button>
                 </form>
