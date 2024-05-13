@@ -26,7 +26,7 @@ export default function Header() {
                 </svg>
             </button>
             <div className={`transition-all duration-500 ${isOpen ? "block" : "hidden"} w-full`} id="navbar-hamburger">
-                <ul className="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+                <ul className="flex flex-col font-medium mt-4 rounded-lg">
                 {!loggedIn ? (
                 <div>
                     <li><Link to="/login" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Login</Link></li>

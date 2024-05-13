@@ -36,14 +36,19 @@ export default function LoginForm() {
 
 
     return (
+        <div className='flex flex-col items-center'>
+        <h1>Login</h1>
+        <form onSubmit={handleSubmit} className='flex flex-col items-center mt-10 mb-5 gap-1 w-3/4'>
+            <label htmlFor="email">Mail</label>
+            <input type="email" name="email" placeholder="Email" onChange={handleChange} />
+            <label htmlFor="password">Password</label>
+            <input type="password" name="password" placeholder="Password" onChange={handleChange} />
+            <button type="submit" className='mt-3 w-20 h-10'>Login</button>
+        </form>
         <div>
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
-                <input type="email" name="email" placeholder="Email" onChange={handleChange} />
-                <input type="password" name="password" placeholder="Password" onChange={handleChange} />
-                <button type="submit">Login</button>
-            </form>
+            <p>Don't have an account?</p>
             <Link to="/register">Register</Link>
         </div>
-    )
+    </div>
+)
 } 
