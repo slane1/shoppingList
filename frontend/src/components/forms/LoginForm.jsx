@@ -43,7 +43,7 @@ export default function LoginForm() {
             <input type="email" name="email" placeholder="Email" onChange={handleChange} />
             <label htmlFor="password">Password</label>
             <input type="password" name="password" placeholder="Password" onChange={handleChange} />
-            <button type="submit" className='mt-3 w-20 h-10'>Login</button>
+            <button type="submit" className='mt-3 w-20 h-10 hover:text-black hover:bg-gray-700 focus:ring-gray-600'>Login</button>
         </form>
         <div>
             <p>Don't have an account?</p>

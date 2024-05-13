@@ -44,7 +44,7 @@ export default function Register() {
                 <input type="email" name="email" onChange={handleChange} />
                 <label htmlFor="password">Password</label>
                 <input type="password" name="password" onChange={handleChange} />
-                <button type="submit" onClick={handleSubmit} className='mt-3 w-20 h-10'>Register</button>
+                <button type="submit" onClick={handleSubmit} className='mt-3 w-20 h-10 dark:hover:bg-gray-700 dark:focus:ring-gray-600'>Register</button>
             </form>
         </div>
     )
