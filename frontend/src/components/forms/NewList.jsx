@@ -35,11 +35,11 @@ export default function NewList() {
         <div>
             <div className='flex flex-col items-center'>
                 <form className='flex flex-col mt-10 mb-5 items-center'>
-                    <div className='flex gap-5'>
+                    <div className='flex flex-row items-center gap-5'>
                         <label htmlFor="title">Title:</label>
                         <input type="text" id="title" name="title" value={newList.title} onChange={handleChange} />
+                        <button type='submit' onClick={handleSubmit} className='flex items-center justify-center hover:text-black hover:bg-gray-700 focus:ring-gray-600'><img src={add} alt="" className='text-blue-500'/></button>
                     </div>
-                    <button type='submit' onClick={handleSubmit} className='flex items-center justify-center mt-3 hover:text-black hover:bg-gray-700 focus:ring-gray-600'><img src={add} alt="" className='text-blue-500'/></button>
                 </form>
             </div>
         </div>

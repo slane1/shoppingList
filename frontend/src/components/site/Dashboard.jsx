@@ -18,32 +18,35 @@ export default function Dashboard() {
         <>
         <Header />
         <div>
-            <div>
-                <h1>Dashboard</h1>
-                <p>Welcome to the Dashboard</p>
+            <div className="flex flex-col">
+                <h1 className="mb-5">Dashboard</h1>
+                <p>Welcome to your Dashboard</p>
+                <p>Here you can view, edit and create ShoppingLists</p>
             </div>
-            <div>
+            <div className="flex flex-col gap-3 mt-5">
                 <h2>Your Shopping Lists</h2>
-                <ul>
-                    {shoppingLists.map((data) => (
-                        <li key={data.id}>
+                <ul className="flex flex-col items-center gap-5">
+                {shoppingLists.map((data) => (
+                    <li key={data.id} className="flex items-center text-end justify-end w-80">
                         <Link
-                        to={{pathname: `/shopping-list/${data.id}`,}}
-                        state={{ data: data.id}}
+                        to={{ pathname: `/shopping-list/${data.id}` }}
+                        state={{ data: data.id }}
+                        className="flex-grow-1"
                         >
-                        {console.log(data.id)}
-                        {data.title}
+                    {data.title}
                         </Link>
-                        <button onClick={() => deleteList(data.id)}>
-                            <img src={deletesvg} alt="Delete" />
-                        </button>
+                    <button
+                        onClick={() => deleteList(data.id)}
+                        className="flex ml-5 items-center justify-center hover:text-black hover:bg-gray-700 focus:ring-gray-600">
+                        <img src={deletesvg} alt="Delete" />
+                    </button>
                     </li>
                 ))}
                 </ul>
-            </div>
-            <div>
-                <NewList />
-            </div>
+        </div>
+        <div>
+            <NewList />
+        </div>
         </div>
         <Footer />
         </> 
