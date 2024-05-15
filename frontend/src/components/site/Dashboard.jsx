@@ -13,9 +13,9 @@ export default function Dashboard() {
     const { loggedIn } = useContext(AuthContext);
 
     return (
-    <>
+    <div>
         {!loggedIn ? <LoggedOut /> :
-        <>
+        <div>
         <Header />
         <div>
             <div className="flex flex-col">
@@ -49,8 +49,8 @@ export default function Dashboard() {
         </div>
         </div>
         <Footer />
-        </> 
+        </div>
         }
-    </>
+    </div>
     );
 }

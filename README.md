@@ -1,7 +1,6 @@
 # Shopping List
 
-This is a simple Shopping list with a backend.
+This is a simple Shopping-List.
 
-Currently, two official plugins are available:
 
-- [Deployed](https://)
+- [Frontend Access](https://)
