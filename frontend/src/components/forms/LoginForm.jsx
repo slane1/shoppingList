@@ -39,7 +39,7 @@ export default function LoginForm() {
     <div className='flex flex-col items-center mt-10'>
         <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
             <form onSubmit={handleSubmit} className='space-y-6'>
-            <h5 className="text-2xl font-medium text-gray-900 dark:text-white">Login</h5>
+            <h2 className="text-2xl font-medium text-gray-900 dark:text-white">Login</h2>
                 <div>
                     <label htmlFor="email" className="block mb-2 text-base text-left font-medium text-gray-900 dark:text-white items-start">Mail</label>
                     <input type="email" name="email" placeholder="Email" className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white' onChange={handleChange} />
