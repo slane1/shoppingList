@@ -11,6 +11,11 @@ export default function AuthProvider({children}) {
 
     async function checkLoggedIn() {
         console.log("Checking logged in");
+        if (!Cookies.get('token')) {
+            console.log("no token found");
+            setLoggedIn(false);
+            return;
+        }
         try {
             const response = await axios.get(`${backendUrl}/auth/auth-user`, {
                 withCredentials: true

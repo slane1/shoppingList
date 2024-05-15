@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { DataContext } from '../../contexts/DataContext';
+import add from '../../assets/plus-solid.svg';
 
 export default function NewList() {
     const { backendUrl, fetchShoppingList } = useContext(DataContext);
@@ -30,16 +31,15 @@ export default function NewList() {
         }
     }
 
-
-
-
     return (
         <div>
-            <div>
-                <form action="">
-                    <label htmlFor="title">Title:</label>
-                    <input type="text" id="title" name="title" value={newList.title} onChange={handleChange} />
-                    <button type='submit' onClick={handleSubmit}>Add</button>
+            <div className='flex flex-col items-center'>
+                <form className='flex flex-col mt-10 mb-5 items-center'>
+                    <div className='flex flex-row items-center gap-5'>
+                        <label htmlFor="title">Title:</label>
+                        <input type="text" id="title" name="title" value={newList.title} onChange={handleChange} />
+                        <button type='submit' onClick={handleSubmit} className='flex items-center justify-center hover:text-black hover:bg-gray-700 focus:ring-gray-600'><img src={add} alt="" className='text-blue-500'/></button>
+                    </div>
                 </form>
             </div>
         </div>

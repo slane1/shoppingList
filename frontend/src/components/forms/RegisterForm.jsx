@@ -34,17 +34,17 @@ export default function Register() {
     
 
     return (
-        <div>
+        <div className='flex flex-col items-center'>
             <h1>Register</h1>
             <p>{response}</p>
-            <form action="">
+            <form className='flex flex-col items-center mt-10 mb-5 gap-1 w-3/4'>
                 <label htmlFor="username">Username</label>
                 <input type="text" name="username" onChange={handleChange} />
                 <label htmlFor="email">Email</label>
                 <input type="email" name="email" onChange={handleChange} />
                 <label htmlFor="password">Password</label>
                 <input type="password" name="password" onChange={handleChange} />
-                <button type="submit" onClick={handleSubmit}>Register</button>
+                <button type="submit" onClick={handleSubmit} className='mt-3 w-20 h-10 dark:hover:bg-gray-700 dark:focus:ring-gray-600'>Register</button>
             </form>
         </div>
     )

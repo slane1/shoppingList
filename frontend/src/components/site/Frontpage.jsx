@@ -4,9 +4,9 @@ import Footer from "./Footer";
 
 export default function Frontpage() {
     return (
-        <div>
+        <div className="flex flex-col min-h-[80vh]">
             <Header />
-            <Welcome />
+                <Welcome />
             <Footer />
         </div>
     )
