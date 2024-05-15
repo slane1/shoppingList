@@ -27,7 +27,7 @@ export default function LogoutForm() {
         <form onSubmit={handleSubmit}>
             <h1 className='mb-5'>Logout</h1>
             <p>Are you sure you want to logout?</p>
-            <button type="submit" className='mt-3 w-20 h-10 hover:text-black hover:bg-gray-700 focus:ring-gray-600'>Logout</button>
+            <button type="submit" className="mt-5 w-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Logout</button>
         </form>
     )
 }
