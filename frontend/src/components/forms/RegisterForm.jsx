@@ -36,9 +36,9 @@ export default function Register() {
     return (
         <div className='flex flex-col items-center mt-10'>
             <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
-            <h2 className="text-2xl font-medium text-gray-900 dark:text-white">Register</h2>
             <p>{response}</p>
             <form className='space-y-6'>
+                <h2 className="text-2xl font-medium text-gray-900 dark:text-white">Register</h2>
                 <div>
                     <label htmlFor="username" className="block mb-2 text-base text-left font-medium text-gray-900 dark:text-white items-start">Username</label>
                     <input type="text" name="username" className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white' onChange={handleChange} />
