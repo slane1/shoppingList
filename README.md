@@ -20,8 +20,9 @@ Welcome to the Simple Shopping List Application! This application allows users t
 1. VITE_BACKEND_URL=Your_Backend_URL
 
 - **Backend:** 
-PORT=Your_Server_Port
-DB_URI=Your_MONGODB_URI
-JWT_SECRET=Your_JWT_Secret
+1. PORT=Your_Server_Port
+2. DB_URI=Your_MONGODB_URI
+3. JWT_SECRET=Your_JWT_Secret
 
+## Visit Demo Website
 - [Frontend Access](https://)
