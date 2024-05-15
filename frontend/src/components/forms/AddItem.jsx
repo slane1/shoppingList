@@ -40,14 +40,14 @@ export default function AddItem(props) {
 
     return (
         <div className='flex flex-col items-center mt-10'>
-            <form onSubmit={handleAdd} className='flex items-center justify-center'>
+            <form onSubmit={handleAdd} className='flex items-center justify-center ml-20'>
                 <div className='flex flex-col items-center'>
                     <label htmlFor="name">Name</label>
                     <input type="text" name="name" id="name" onChange={handleChange}/>
                     <label htmlFor="quantity">Quantity</label>
                     <input type="number" name="quantity" id="quantity" value={item.quantity} onChange={handleChange}/>
                 </div>
-                <button type="submit" className='flex items-center justify-center ml-5 hover:text-black hover:bg-gray-700 focus:ring-gray-600'><img src={add} alt="" /></button>
+                <button type="submit" className='flex items-center justify-center ml-10 mt-5 hover:text-black hover:bg-gray-700 focus:ring-gray-600'><img src={add} alt="" /></button>
             </form>
         </div>
     )

@@ -25,9 +25,9 @@ export default function Dashboard() {
             </div>
             <div className="flex flex-col gap-3 mt-5">
                 <h2>Your Shopping Lists</h2>
-                <ul className="flex flex-col items-center gap-5">
+                <ul className="flex flex-col items-center gap-5 ">
                 {shoppingLists.map((data) => (
-                    <li key={data.id} className="flex items-center text-end justify-end w-80">
+                    <li key={data.id} className="flex items-center text-end justify-end w-80 ">
                         <Link
                         to={{ pathname: `/shopping-list/${data.id}` }}
                         state={{ data: data.id }}
