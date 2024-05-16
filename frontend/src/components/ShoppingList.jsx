@@ -21,56 +21,76 @@ export default function ShoppingList({data, listId}) {
     } else {
     return (
         <div className="flex flex-col items-center">
-            <h1 className='mb-5' >{data.name.toUpperCase()}</h1>
-{/* Add first list to display items that have not been marked as done */}
-            <ul className="flex flex-col items-center gap-5 bg-blue-950 p-8 rounded-3xl">
-                {data.items
-                .filter((item) => !item.done)
-                .map((item) => (
-                    <li key={item._id} className="flex items-center text-end justify-end w-80" >
-                        <div className='flex items-center'>
-                        <p className='mr-3'>{item.quantity}x</p>
-                        {item.done ? <p className='line-through'>{item.name}</p> : <p>{item.name}</p>}
-                        <button
-                        className="flex ml-5 items-center justify-center bg-teal-600 hover:text-black hover:bg-teal-200 focus:ring-gray-600"
-                        onClick={() => handleGot(item._id, listId)}>
-                            <img src={gotsvg} alt="Got" />
-                        </button>
-                        </div>
-                    </li>
-                ))}
-            </ul>
-
-            {data.items.some(item => item.done) && 
-            <div className="items-center border-black border-b w-20 mt-5 mb-5"></div>
-            }
+            <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+                <div className="flex items-center justify-between mb-4">
+                    <h1 className='mb-5' >{data.name.toUpperCase()}</h1>
+                </div>
+                <div className="flow-root">
+                    <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+                        {data.items
+                        .filter((item) => !item.done)
+                        .map((item) => (
+                            <li key={item._id} className="py-3 sm:py-4" >
+                                <div className="flex items-end">
+                                    <div className="flex-shrink-0">
+                                        <p className='mr-3'>{item.quantity}x</p>
+                                    </div>
+                                    <div className="flex-1 min-w-0 ms-4 text-right mr-1">
+                                        <p className="text-sm font-medium text-gray-900  dark:text-white">{item.name}</p>
+                                    </div>
+                                    <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                        <button
+                                        className="flex ml-5 items-center justify-center bg-teal-600 hover:text-black hover:bg-teal-200 focus:ring-gray-600"
+                                        onClick={() => handleGot(item._id, listId)}>
+                                            <img src={gotsvg} alt="Got" />
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                            </li>
+                        ))}
+                    </ul>
+            </div>
+        </div>
 
 {/* Add second list to display items that have been marked as done */}
-            <ul className={data.items.some(item => item.done) && "flex flex-col items-center gap-5 bg-blue-950 p-8 rounded-3xl"}>
-                {data.items
-                .filter((item) => item.done)
-                .map((item) => (
-                    <li key={item._id} className="flex items-center text-end justify-end w-80" >
-                        <div className='flex items-center'>
-                        <p className='mr-3'>{item.quantity}x</p>
-                        {item.done ? <p className='line-through'>{item.name}</p> : <p>{item.name}</p>}
-                        <button
-                        className="flex ml-5 items-center justify-center bg-sky-900 hover:text-black hover:bg-sky-200 focus:ring-gray-600"
-                        onClick={() => handleGot(item._id, listId)}>
-                            <img src={undosvg} alt="Got" />
-                        </button>
-                        {item.done && 
-                        <button 
-                        className="flex ml-3 items-center justify-center bg-rose-950 hover:text-black hover:bg-rose-200 focus:ring-gray-600"
-                        onClick={() => handleDelete(item._id, listId)}>
-                            <img src={deletesvg} alt="Delete" />
-                        </button>
-                        }
-                        </div>
-                    </li>
-                ))}
-            </ul>
+{data.items.some(item => item.done) &&
+        <div className="mt-16 w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+            <div className="flex items-center justify-between mb-4">
+                <h2 className='mb-5' >Done:</h2>
+            </div>
+            <div className="flow-root">
+                <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+                    {data.items
+                    .filter((item) => item.done)
+                    .map((item) => (
+                        <li key={item._id} className="py-3 sm:py-4" >
+                            <div className="flex items-end">
+                                <div className="flex-shrink-0">
+                                    <p className='mr-3 line-through'>{item.quantity}x</p>
+                                </div>
+                                <div className="flex-1 min-w-0 ms-4 text-right mr-1">
+                                    <p className="text-sm font-medium text-gray-900  dark:text-white line-through">{item.name}</p>
+                                </div>
+                                <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                    <button
+                                        className="ml-5 flex justify-center items-center w-4 h-4 text-blue-700 dark:text-blue-500 bg-blue-700 hover:bg-blue-800"
+                                        onClick={() => handleGot(item._id, listId)}>
+                                            <img src={undosvg} alt="Got" />
+                                    </button>
+                                    <button 
+                                        className="ml-5 flex justify-center items-center w-4 h-4 text-red-700 dark:text-red-500 bg-red-700 hover:bg-red-800"
+                                        onClick={() => handleDelete(item._id, listId)}>
+                                            <img src={deletesvg} alt="Delete" />
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
         </div>
+    </div>}
+</div>
     );
 }
 }
