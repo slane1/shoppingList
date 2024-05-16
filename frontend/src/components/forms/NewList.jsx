@@ -32,14 +32,15 @@ export default function NewList() {
     }
 
     return (
-        <div>
-            <div className='flex flex-col items-center'>
-                <form className='flex flex-col mt-10 mb-5 items-center'>
-                    <div className='flex flex-row items-center gap-5'>
-                        <label htmlFor="title">Title:</label>
-                        <input type="text" id="title" name="title" value={newList.title} onChange={handleChange} />
-                        <button type='submit' onClick={handleSubmit} className='flex items-center justify-center hover:text-black hover:bg-gray-700 focus:ring-gray-600'><img src={add} alt="" className='text-blue-500'/></button>
+        <div className='flex flex-col items-center mt-10'>
+            <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+                <form className='space-y-6'>
+                    <h2 className="text-2xl font-medium text-gray-900 dark:text-white">Create new List</h2>
+                    <div>
+                        <label htmlFor="title" className="block mb-2 text-base text-left font-medium text-gray-900 dark:text-white items-start">Title:</label>
+                        <input type="text" id="title" name="title" className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white' value={newList.title} onChange={handleChange} />
                     </div>
+                        <button type='submit' onClick={handleSubmit} className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add List</button>
                 </form>
             </div>
         </div>
