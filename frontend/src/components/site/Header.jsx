@@ -15,31 +15,35 @@ export default function Header() {
                 <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
                 <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Home</span>
                 </Link>
-            <button 
-                onClick={toggleNavbar}
-                className="inline-flex items-center justify-center p-2 w-10 h-10 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" 
-                aria-controls="navbar-hamburger" 
-                aria-expanded={isOpen ? "true" : "false"}>
-                <span className="sr-only">Open main menu</span>
-                <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>
-                </svg>
-            </button>
-            <div className={`transition-all duration-500 ${isOpen ? "block" : "hidden"} w-full`} id="navbar-hamburger">
-                <ul className="flex flex-col font-medium mt-4 rounded-lg">
-                {!loggedIn ? (
-                <div>
-                    <li><Link to="/login" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Login</Link></li>
-                    <li><Link to="/register" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Register</Link></li>
+                <div className="flex gap-5">
+                    {loggedIn ? (
+                        <div className="flex gap-5">
+                            <Link to="/dashboard" className="text-white">
+                                <button className="w-auto text-white bg-cyan-700 hover:bg-cyan-800 focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800">
+                                Dashboard
+                                </button>
+                            </Link>
+                            <Link to="/logout" className="text-white">
+                                <button className="w-auto text-white bg-cyan-700 hover:bg-cyan-800 focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800">
+                                Logout
+                                </button>
+                            </Link>
+                        </div>
+                    ) :
+                    <div className="flex gap-5">
+                    <Link to="/login" className="text-white" >
+                        <button className="w-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Login
+                        </button>
+                    </Link>
+                    <Link to="/register" className="text-white">
+                        <button className="w-auto text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-teal-600 dark:hover:bg-lime-700 dark:focus:ring-teal-800">
+                        Register
+                        </button>
+                    </Link>
+                    </div>
+                    }
                 </div>
-            ) : (
-                <div>
-                    <li><Link to="/dashboard" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white">Dashboard</Link></li>
-                    <li><Link to="/logout" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Logout</Link></li>
-                </div>
-            )}
-            </ul>
-            </div>
         </div>
     </nav>
     );
