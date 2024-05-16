@@ -24,10 +24,14 @@ export default function LogoutForm() {
 
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h1 className='mb-5'>Logout</h1>
-            <p>Are you sure you want to logout?</p>
-            <button type="submit" className='mt-3 w-20 h-10 hover:text-black hover:bg-gray-700 focus:ring-gray-600'>Logout</button>
-        </form>
+        <div className='flex flex-col items-center mt-10'>
+            <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+                <form onSubmit={handleSubmit}>
+                    <h1 className='mb-5'>Logout</h1>
+                    <p>Are you sure you want to logout?</p>
+                    <button type="submit" className="mt-5 w-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Logout</button>
+                </form>
+            </div>
+        </div>
     )
 }

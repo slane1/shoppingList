@@ -36,18 +36,24 @@ export default function LoginForm() {
 
 
     return (
-        <div className='flex flex-col items-center'>
-        <h1>Login</h1>
-        <form onSubmit={handleSubmit} className='flex flex-col items-center mt-10 mb-5 gap-1 w-3/4'>
-            <label htmlFor="email">Mail</label>
-            <input type="email" name="email" placeholder="Email" onChange={handleChange} />
-            <label htmlFor="password">Password</label>
-            <input type="password" name="password" placeholder="Password" onChange={handleChange} />
-            <button type="submit" className='mt-3 w-20 h-10 hover:text-black hover:bg-gray-700 focus:ring-gray-600'>Login</button>
-        </form>
-        <div>
-            <p>Don't have an account?</p>
-            <Link to="/register">Register</Link>
+    <div className='flex flex-col items-center mt-10'>
+        <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+            <form onSubmit={handleSubmit} className='space-y-6'>
+            <h2 className="text-2xl font-medium text-gray-900 dark:text-white">Login</h2>
+                <div>
+                    <label htmlFor="email" className="block mb-2 text-base text-left font-medium text-gray-900 dark:text-white items-start">Mail</label>
+                    <input type="email" name="email" placeholder="Email" className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white' onChange={handleChange} />
+                </div>
+                <div>
+                    <label htmlFor="password" className="block mb-2 text-base text-left font-medium text-gray-900 dark:text-white items-start">Password</label>
+                    <input type="password" name="password" placeholder="Password" className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white' onChange={handleChange} />
+                </div>
+                <button type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</button>
+            </form>
+            <div className="text-sm font-medium text-gray-500 dark:text-gray-300 mt-5">
+                <p>Don't have an account?</p>
+                <Link to="/register">Register</Link>
+            </div>
         </div>
     </div>
 )

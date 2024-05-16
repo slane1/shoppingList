@@ -34,18 +34,26 @@ export default function Register() {
     
 
     return (
-        <div className='flex flex-col items-center'>
-            <h1>Register</h1>
+        <div className='flex flex-col items-center mt-10'>
+            <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
             <p>{response}</p>
-            <form className='flex flex-col items-center mt-10 mb-5 gap-1 w-3/4'>
-                <label htmlFor="username">Username</label>
-                <input type="text" name="username" onChange={handleChange} />
-                <label htmlFor="email">Email</label>
-                <input type="email" name="email" onChange={handleChange} />
-                <label htmlFor="password">Password</label>
-                <input type="password" name="password" onChange={handleChange} />
-                <button type="submit" onClick={handleSubmit} className='mt-3 w-20 h-10 dark:hover:bg-gray-700 dark:focus:ring-gray-600'>Register</button>
+            <form className='space-y-6'>
+                <h2 className="text-2xl font-medium text-gray-900 dark:text-white">Register</h2>
+                <div>
+                    <label htmlFor="username" className="block mb-2 text-base text-left font-medium text-gray-900 dark:text-white items-start">Username</label>
+                    <input type="text" name="username" className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white' onChange={handleChange} />
+                </div>
+                <div>
+                    <label htmlFor="email" className="block mb-2 text-base text-left font-medium text-gray-900 dark:text-white items-start">Email</label>
+                    <input type="email" name="email" className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white' onChange={handleChange} />
+                </div>
+                <div>
+                    <label htmlFor="password" className="block mb-2 text-base text-left font-medium text-gray-900 dark:text-white items-start">Password</label>
+                    <input type="password" name="password" className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white' onChange={handleChange} />
+                </div>
+                <button type="submit" onClick={handleSubmit} className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Register</button>
             </form>
+            </div>
         </div>
     )
     
