@@ -33,7 +33,7 @@ export default function ShoppingList({data, listId}) {
                             <li key={item._id} className="py-3 sm:py-4" >
                                 <div className="flex items-end">
                                     <div className="flex-shrink-0">
-                                        <p className='mr-3'>{item.quantity}x</p>
+                                        <p className='ml-3 mr-3'>{item.quantity}</p>
                                     </div>
                                     <div className="flex-1 min-w-0 ms-4 text-right mr-1">
                                         <p className="text-sm font-medium text-gray-900  dark:text-white">{item.name}</p>
@@ -67,7 +67,7 @@ export default function ShoppingList({data, listId}) {
                         <li key={item._id} className="py-3 sm:py-4" >
                             <div className="flex items-end">
                                 <div className="flex-shrink-0">
-                                    <p className='mr-3 line-through'>{item.quantity}x</p>
+                                    <p className='ml-3 mr-3 line-through'>{item.quantity}</p>
                                 </div>
                                 <div className="flex-1 min-w-0 ms-4 text-right mr-1">
                                     <p className="text-sm font-medium text-gray-900  dark:text-white line-through">{item.name}</p>
